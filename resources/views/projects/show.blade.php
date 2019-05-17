@@ -41,6 +41,7 @@
 				<div>
 					<h2 class="text-lg text-grey font-normal mb-3">General Notes</h2>
 
+					{{-- general notes --}}
 					<form method="POST" action="{{ $project->path() }}">
 						@csrf
 						@method('PATCH')
@@ -54,6 +55,8 @@
 
 						<button type="submit" class="button">Save</button>
 					</form>
+
+					@include ('errors')
 				</div>
 			</div>
 			<div class="lg:w-1/4 px-3">
