@@ -1,12 +1,12 @@
 @extends ('layouts.app')
 
 @section('content')
-	<header class="flex items-center mb-3 py-4">
+	<header class="flex items-center mb-3 pb-4">
 		<div class="flex justify-between items-end w-full">
 			<p class="text-grey text-sm font-normal">
 				<a href="/projects" class="text-grey text-sm font-normal no-underline">My Projects</a> / {{ $project->title }}
 			</p>
-			<a class="button" href="/projects/create">New Project</a>
+			<a class="button" href="{{ $project->path() . '/edit' }}">Edit Project</a>
 		</div>
 	</header>
 
