@@ -10,5 +10,6 @@ $factory->define(Task::class, function (Faker $faker) {
     return [
     	'project_id' => factory(\App\Project::class),
         'body' => $faker->sentence(),
+        'completed' => false,
     ];
 });
