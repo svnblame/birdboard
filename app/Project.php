@@ -18,7 +18,7 @@ class Project extends Model
     }
 
     /**
-     * Record activity forr a project.
+     * Record activity for a project.
      *
      * @param string $description
      */
