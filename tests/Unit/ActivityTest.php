@@ -5,6 +5,7 @@ namespace Tests\Unit;
 use App\User;
 use App\Project;
 use Tests\TestCase;
+use Facades\Tests\Scaffold\ProjectFactory;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
@@ -14,8 +15,10 @@ class ActivityTest extends TestCase
 
 	/** @test */
 	function has_user() {
-		$project = factory(Project::class)->create();
+		$user = $this->signIn();
 
-		$this->assertInstanceOf(User::class, $project->activity->first()->user);
+		$project = ProjectFactory::ownedBy($user)->create();
+
+		$this->assertEquals($user->id, $project->activity->first()->user->id);
 	}
 }
