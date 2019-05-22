@@ -12,6 +12,11 @@ class Activity extends Model
     	'changes' => 'array',
     ];
 
+    public function getUsernameAttribute()
+    {
+        return (auth()->user()->is($this->user)) ? "You" : $this->user->name;
+    }
+
     public function subject()
     {
     	return $this->morphTo();
