@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\User;
 use App\RecordsActivity;
 use Illuminate\Database\Eloquent\Model;
 
@@ -20,6 +21,11 @@ class Project extends Model
     	return $this->tasks()->create(compact('body'));
     }
 
+    public function invite(User $user)
+    {
+        return $this->members()->attach($user);
+    }
+
     // Relationships
     public function owner()
     {
@@ -33,5 +39,10 @@ class Project extends Model
     public function activity()
     {
         return $this->hasMany(Activity::class)->latest();
+    }
+
+    public function members()
+    {
+        return $this->belongsToMany(User::class, 'project_members');
     }
 }
