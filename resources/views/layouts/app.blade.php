@@ -47,7 +47,7 @@
                         </ul>
 
                         <!-- Right Side Of Navbar -->
-                        <ul class="navbar-nav ml-auto">
+                        <ul class="navbar-nav ml-auto list-reset">
                             <!-- Authentication Links -->
                             @guest
                                 <li class="nav-item">
@@ -61,7 +61,11 @@
                             @else
                                 <li class="nav-item dropdown">
                                     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                        {{ Auth::user()->name }} <span class="caret"></span>
+                                        <img
+                                            src="{{ gravatar_url(Auth::user()->email, 20) }}"
+                                            alt="{{ Auth::user()->name }}'s avatar"
+                                            class="rounded-full"
+                                        >
                                     </a>
 
                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
