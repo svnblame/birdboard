@@ -42,7 +42,7 @@
 
                     <div>
                         <!-- Right Side Of Navbar -->
-                        <div class="navbar-nav ml-auto list-reset">
+                        <div class="flex items-center ml-auto">
                             <!-- Authentication Links -->
                             @guest
                                 <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
@@ -50,6 +50,8 @@
                                     <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                                 @endif
                             @else
+                                <theme-switcher></theme-switcher>
+                                
                                 <a
                                         class="flex items-center text-default no-underline text-sm"
                                         href="#" role="button"
