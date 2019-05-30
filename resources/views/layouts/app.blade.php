@@ -21,7 +21,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 
-<body class="theme-dark bg-page">
+<body class="theme-light bg-page">
     <div id="app">
         <nav class="bg-header section">
             <div class="container mx-auto">
@@ -42,20 +42,17 @@
 
                     <div>
                         <!-- Right Side Of Navbar -->
-                        <ul class="navbar-nav ml-auto list-reset">
+                        <div class="flex items-center ml-auto">
                             <!-- Authentication Links -->
                             @guest
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                                </li>
+                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                                 @if (Route::has('register'))
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                    </li>
+                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                                 @endif
                             @else
-                                <li class="nav-item dropdown">
-                                    <a
+                                <theme-switcher></theme-switcher>
+                                
+                                <a
                                         class="flex items-center text-default no-underline text-sm"
                                         href="#" role="button"
                                         data-toggle="dropdown"
@@ -80,9 +77,8 @@
                                             </form>
                                         </div>
                                     </a>
-                                </li>
                             @endguest
-                        </ul>
+                        </div>
                     </div>
                 </div>
             </div>
