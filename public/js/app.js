@@ -1784,9 +1784,13 @@ __webpack_require__.r(__webpack_exports__);
       selectedTheme: 'theme-light'
     };
   },
+  created: function created() {
+    this.selectedTheme = localStorage.getItem('theme') || 'theme-light';
+  },
   watch: {
     selectedTheme: function selectedTheme() {
       document.body.className = document.body.className.replace(/theme-\w+/, this.selectedTheme);
+      localStorage.setItem('theme', this.selectedTheme);
     }
   }
 });
