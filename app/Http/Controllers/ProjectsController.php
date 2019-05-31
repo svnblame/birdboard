@@ -25,9 +25,18 @@ class ProjectsController extends Controller
         return view('projects.show', compact('project'));
     }
 
+    /**
+     * Persist a new project
+     *
+     * @return mixed
+     */
     public function store()
     {
         $project = auth()->user()->projects()->create($this->validateRequest());
+
+        if ($tasks = request()->has('tasks')) {
+            $project->addTasks($tasks);
+        }
 
         if (request()->wantsJson()) {
             return ['message' => $project->path()];
@@ -36,6 +45,12 @@ class ProjectsController extends Controller
 		return redirect($project->path());
     }
 
+    /**
+     * Edit the project
+     *
+     * @param Project $project
+     * @return \Illuminate\Http\Response
+     */
     public function edit(Project $project)
     {
         return view('projects.edit', compact('project'));
