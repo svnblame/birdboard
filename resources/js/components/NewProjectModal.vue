@@ -65,16 +65,18 @@
 </template>
 
 <script>
+	import BirdboardForm from './BirdboardForm';
+
 	export default {
 		data() {
 			return {
-				form: {
+				form: new BirdboardForm ({
 					title: '',
 					description: '',
 					tasks: [
 						{ body: '' }   
 					]
-				},
+				}),
 
 				errors: {}
 			};
@@ -86,11 +88,13 @@
 			},
 
 			async submit() {
-				try {
+				this.form.submit('/projects')
+					  .then(response => location = response.data.message);
+				/*try {
 					location = (await axios.post('/projects', this.form)).data.message;
 				} catch (error) {
 					this.errors = error.response.data.errors;
-				}
+				}*/
 			}
 		}
 	}
