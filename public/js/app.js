@@ -1860,14 +1860,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         tasks: [{
           body: ''
         }]
-      }),
-      errors: {}
+      })
     };
   },
   methods: {
     addTask: function addTask() {
       this.form.tasks.push({
-        value: ''
+        body: ''
       });
     },
     submit: function () {
@@ -1878,16 +1877,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
+                if (!this.form.tasks[0].body) {
+                  delete this.form.originalData.tasks;
+                }
+
                 this.form.submit('/projects').then(function (response) {
                   return location = response.data.message;
                 });
-                /*try {
-                	location = (await axios.post('/projects', this.form)).data.message;
-                } catch (error) {
-                	this.errors = error.response.data.errors;
-                }*/
 
-              case 1:
+              case 2:
               case "end":
                 return _context.stop();
             }
@@ -37997,7 +37995,7 @@ var render = function() {
     },
     [
       _c("h1", { staticClass: "font-normal mb-16 text-center text-2xl" }, [
-        _vm._v("Create New Project")
+        _vm._v("Let’s Start Something New")
       ]),
       _vm._v(" "),
       _c(
@@ -38033,7 +38031,7 @@ var render = function() {
                     }
                   ],
                   staticClass: "border p-2 text-xs block w-full rounded",
-                  class: _vm.errors.title
+                  class: _vm.form.errors.title
                     ? "border-error"
                     : "border-muted-light",
                   attrs: { type: "text", id: "title" },
@@ -38048,10 +38046,12 @@ var render = function() {
                   }
                 }),
                 _vm._v(" "),
-                _vm.errors.title
+                _vm.form.errors.title
                   ? _c("span", {
                       staticClass: "text-xs italic text-error",
-                      domProps: { textContent: _vm._s(_vm.errors.title[0]) }
+                      domProps: {
+                        textContent: _vm._s(_vm.form.errors.title[0])
+                      }
                     })
                   : _vm._e()
               ]),
@@ -38075,11 +38075,12 @@ var render = function() {
                       expression: "form.description"
                     }
                   ],
-                  staticClass: "border p-2 text-xs block w-full rounded",
-                  class: _vm.errors.description
+                  staticClass:
+                    "border border-muted-light p-2 text-xs block w-full rounded",
+                  class: _vm.form.errors.description
                     ? "border-error"
                     : "border-muted-light",
-                  attrs: { type: "text", id: "description", rows: "7" },
+                  attrs: { id: "description", rows: "7" },
                   domProps: { value: _vm.form.description },
                   on: {
                     input: function($event) {
@@ -38091,11 +38092,11 @@ var render = function() {
                   }
                 }),
                 _vm._v(" "),
-                _vm.errors.description
+                _vm.form.errors.description
                   ? _c("span", {
                       staticClass: "text-xs italic text-error",
                       domProps: {
-                        textContent: _vm._s(_vm.errors.description[0])
+                        textContent: _vm._s(_vm.form.errors.description[0])
                       }
                     })
                   : _vm._e()
@@ -38108,7 +38109,7 @@ var render = function() {
                 { staticClass: "mb-4" },
                 [
                   _c("label", { staticClass: "text-sm block mb-2" }, [
-                    _vm._v("Need some tasks?")
+                    _vm._v("Need Some Tasks?")
                   ]),
                   _vm._v(" "),
                   _vm._l(_vm.form.tasks, function(task) {
@@ -38122,12 +38123,8 @@ var render = function() {
                         }
                       ],
                       staticClass:
-                        "border border-muted-light mb-2  p-2 text-xs block w-full rounded",
-                      attrs: {
-                        type: "text",
-                        id: "title",
-                        placeholder: "Task 1"
-                      },
+                        "border border-muted-light mb-2 p-2 text-xs block w-full rounded",
+                      attrs: { type: "text", placeholder: "Task 1" },
                       domProps: { value: task.body },
                       on: {
                         input: function($event) {
@@ -38155,14 +38152,19 @@ var render = function() {
                     "svg",
                     {
                       staticClass: "mr-2",
-                      attrs: { viewbox: "0 0 18 18", height: "18", width: "18" }
+                      attrs: {
+                        xmlns: "http://www.w3.org/2000/svg",
+                        width: "18",
+                        height: "18",
+                        viewBox: "0 0 18 18"
+                      }
                     },
                     [
                       _c(
                         "g",
                         {
                           attrs: {
-                            fill: "#000",
+                            fill: "none",
                             "fill-rule": "evenodd",
                             opacity: ".307"
                           }
@@ -38170,9 +38172,18 @@ var render = function() {
                         [
                           _c("path", {
                             attrs: {
+                              stroke: "#000",
+                              "stroke-opacity": ".012",
+                              "stroke-width": "0",
+                              d: "M-3-3h24v24H-3z"
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("path", {
+                            attrs: {
                               fill: "#000",
                               d:
-                                "M14.613,10c0,0.23-0.188,0.419-0.419,0.419H10.42v3.774c0,0.23-0.189,0.42-0.42,0.42s-0.419-0.189-0.419-0.42v-3.774H5.806c-0.23,0-0.419-0.189-0.419-0.419s0.189-0.419,0.419-0.419h3.775V5.806c0-0.23,0.189-0.419,0.419-0.419s0.42,0.189,0.42,0.419v3.775h3.774C14.425,9.581,14.613,9.77,14.613,10 M17.969,10c0,4.401-3.567,7.969-7.969,7.969c-4.402,0-7.969-3.567-7.969-7.969c0-4.402,3.567-7.969,7.969-7.969C14.401,2.031,17.969,5.598,17.969,10 M17.13,10c0-3.932-3.198-7.13-7.13-7.13S2.87,6.068,2.87,10c0,3.933,3.198,7.13,7.13,7.13S17.13,13.933,17.13,10"
+                                "M9 0a9 9 0 0 0-9 9c0 4.97 4.02 9 9 9A9 9 0 0 0 9 0zm0 16c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7zm1-11H8v3H5v2h3v3h2v-3h3V8h-3V5z"
                             }
                           })
                         ]
@@ -38180,7 +38191,7 @@ var render = function() {
                     ]
                   ),
                   _vm._v(" "),
-                  _c("span", [_vm._v("Add New Task")])
+                  _c("span", [_vm._v("Add New Task Field")])
                 ]
               )
             ])
@@ -50519,23 +50530,58 @@ function () {
     this.originalData = JSON.parse(JSON.stringify(data));
     Object.assign(this, data);
     this.errors = {};
+    this.submitted = false;
   }
 
   _createClass(BirdboardForm, [{
     key: "data",
     value: function data() {
-      var data = {};
+      var _this = this;
 
-      for (var attribute in this.originalData) {
-        data[attribute] = this[attribute];
-      }
-
-      return data;
+      return Object.keys(this.originalData).reduce(function (data, attribute) {
+        data[attribute] = _this[attribute];
+        return data;
+      }, {});
+    }
+  }, {
+    key: "post",
+    value: function post(endpoint) {
+      return this.submit(endpoint);
+    }
+  }, {
+    key: "patch",
+    value: function patch(endpoint) {
+      return this.submit(endpoint, 'patch');
+    }
+  }, {
+    key: "delete",
+    value: function _delete(endpoint) {
+      return this.submit(endpoint, 'delete');
     }
   }, {
     key: "submit",
     value: function submit(endpoint) {
-      return axios.post(endpoint, this.data());
+      var requestType = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'post';
+      return axios[requestType](endpoint, this.data())["catch"](this.onFail.bind(this)).then(this.onSuccess.bind(this));
+    }
+  }, {
+    key: "onSuccess",
+    value: function onSuccess(response) {
+      this.submitted = true;
+      this.errors = {};
+      return response;
+    }
+  }, {
+    key: "onFail",
+    value: function onFail(error) {
+      this.errors = error.response.data.errors;
+      this.submitted = false;
+      throw error;
+    }
+  }, {
+    key: "reset",
+    value: function reset() {
+      Object.assign(this, this.originalData);
     }
   }]);
 
