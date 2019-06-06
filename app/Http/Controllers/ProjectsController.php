@@ -33,8 +33,8 @@ class ProjectsController extends Controller
     public function store()
     {
         $project = auth()->user()->projects()->create($this->validateRequest());
-
-        if ($tasks = request()->has('tasks')) {
+        
+        if ($tasks = request('tasks')) {
             $project->addTasks($tasks);
         }
 
@@ -42,7 +42,7 @@ class ProjectsController extends Controller
             return ['message' => $project->path()];
         }
 
-		return redirect($project->path());
+        return redirect($project->path());
     }
 
     /**
